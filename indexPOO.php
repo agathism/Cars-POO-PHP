@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php
+require_once("functions.php");
+require_once("connectDB.php");
+require_once("Car.php");
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+$pdo = connectDB();
+var_dump($car);
 
-<body>
-    <?php
-    require_once 'Entity/Car.php'; 
-    require_once 'functions.php';
-    require_once 'connectDB.php';
-    ?>
-    <?php
-    $pdo = connectDB();
-    $cars = selectAllCars($pdo);
-    
-    ?>
-</body>
-
-</html>

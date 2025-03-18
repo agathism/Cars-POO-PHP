@@ -1,4 +1,3 @@
--- Active: 1741252344572@@127.0.0.1@3306
 
 
 -- Créer un doissier PHP-PDO

@@ -1,21 +1,21 @@
 <?php
-require_once("connectDB.php");
 require_once("functions.php");
 require_once("Car.php");
+require_once("CarManager.php");
 
 // Vérifier que l'utilisateur est connécté avec la présence
 // D'un "username" en SESSION
 verifySession();
 //Vérifier si l'ID est présent dans l'url
-if(!isset($_GET["id"])){
+if (!isset($_GET["id"])) {
     header("Location: admin.php");
 }
 
-$pdo = connectDB();
-$car = selectCarByID($pdo, $_GET["id"]); // Un seul connect DB par page
+$carManager = new CarManager();
+$car = $carManager->selectCarByID($_GET["id"]); // Un seul connect DB par page
 
 //Vérifier si la voiture avec l'ID existe en BDD
-if(!$car){
+if (!$car) {
     header("Location: admin.php");
 }
 
@@ -24,22 +24,19 @@ $errors = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Vérifier les champs du formulaire
-    $errors = validateCarForm($errors,$_POST);
+    $errors = validateCarForm($errors, $_POST);
     // Si le formulaire n'a pas renvoyé d'erreurs
     if (empty($errors)) {
-        
+
         // Mettre à jour la voiture $car et rediriger
         $car->setModel($_POST["model"]);
         $car->setBrand($_POST["brand"]);
         $car->setImage($_POST["image"]);
         $car->setHorsePower($_POST["horsePower"]);
-
-        updateCarByID($pdo, $car);
+        $carManager->updateCarByID($car);
         header("Location: index.php");
         exit();
-
     }
-
 }
 
 

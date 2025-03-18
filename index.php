@@ -1,10 +1,12 @@
 <?php
 require_once("functions.php");
-require_once("connectDB.php");
 require_once("Car.php");
+require_once("CarManager.php");
 
-$pdo = connectDB();
-$cars = selectAllCars($pdo);
+//Refaire cette ligne partout ou on aura besoin des fonctions dans CarManager
+//C'est comme si on introduisait le nouvel objet 
+$carManager = new CarManager();
+$cars = $carManager->selectAll();
 
 $title = "Bienvenue dans le Garage";
 require_once("header.php");

@@ -26,17 +26,6 @@ class Car
     }
 
     /**
-     * Set the value of id
-     *
-     * @return  self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-    }
-
-    /**
      * Get the value of brand
      */
     public function getBrand()

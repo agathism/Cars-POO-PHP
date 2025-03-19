@@ -1,13 +1,5 @@
 <?php
-/**
- * Récupère toutes les voitures de la base de données.
- *
- * @param PDO $pdo La connexion PDO.
- *
- * @return array Tableau d'instances Car.
- */
 
-// Class CarForm... ?
 function validateCarForm(array $errors, array $carForm): array
 {
     if (empty($carForm["model"])) {
@@ -23,21 +15,16 @@ function validateCarForm(array $errors, array $carForm): array
         $errors["image"] = "l'image de la voiture est manquante";
     }
     //Démo class CarFormValidator
-    
+
     return $errors;
 }
 
-//Class UserManager
-function selectUserByUsername(PDO $pdo, string $username): array|false
-{
-    $requete = $pdo->prepare("SELECT * FROM user WHERE username = :username;");
-    $requete->execute([
-        ":username" => $username
-    ]);
-    return $requete->fetch();
-}
-
 //Class SessionChecker
+/**
+ * Vérifie si une session est active et redirige vers la page d'accueil si ce n'est pas le cas.
+ *
+ * @return void
+ */
 function verifySession(): void
 {
     if (!isset($_SESSION)) {
@@ -48,4 +35,5 @@ function verifySession(): void
         header("Location: index.php");
         exit();
     }
+    // functions.php
 }

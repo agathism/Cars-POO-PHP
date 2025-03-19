@@ -1,7 +1,8 @@
 <?php
 require_once("functions.php");
-require_once("Car.php");
-require_once("CarManager.php");
+require_once("Model/Car.php");
+require_once("Manager/DatabaseManager.php");
+require_once("Manager/CarManager.php");
 
 // Vérifier que l'utilisateur est connecté
 verifySession();

@@ -1,7 +1,7 @@
 <?php
 require_once("functions.php");
-require_once("Car.php");
-require_once("CarManager.php");
+require_once("Model/Car.php");
+require_once("Manager/CarManager.php");
 
 //Refaire cette ligne partout ou on aura besoin des fonctions dans CarManager
 //C'est comme si on introduisait le nouvel objet 

@@ -3,10 +3,11 @@
 class DatabaseManager
 {
     protected static ?PDO $pdo = null;
-    public static function getConnexion(){
+    protected static function getConnexion()
+    {
         //Si la connexion n'existe pas je la créé 
         //Self c''st comme si on écrivait databaseManager dans lui même. 
-        if(self::$pdo === null){
+        if (self::$pdo === null) {
             //Créer connexion
             //Comme on va réeutiliser connectDb on va le mettre en static en utilisant self::suivi du nom de la bdd
             self::$pdo = self::connectDB();
@@ -14,7 +15,7 @@ class DatabaseManager
         }
         return self::$pdo;
     }
-    public static function connectDB(): PDO
+    private static function connectDB(): PDO
     {
         $host = 'localhost';
         $dbName = 'garage12';
@@ -32,4 +33,5 @@ class DatabaseManager
             die();
         }
     }
+
 }

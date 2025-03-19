@@ -1,8 +1,7 @@
 <?php
 require_once("functions.php");
-require_once("Car.php");
-require_once("CarManager.php");
-
+require_once("Model/Car.php");
+require_once("Manager/CarManager.php");
 // Vérifier que l'utilisateur est connécté avec la présence
 verifySession();
 //Vérifier si l'ID est présent dans l'url
@@ -22,7 +21,7 @@ if (!$car) {
 //Si le form est validé
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Supprimer la voiture et rediriger
-    $carManager = new CarManager($pdo);
+    $carManager = new CarManager();
     $cars = $carManager->deleteCarByID($car->getId());
     header("Location: index.php?delete=ok");
 }

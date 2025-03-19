@@ -1,11 +1,11 @@
 <?php
 require_once("functions.php");
-require_once("Car.php");
-require_once("CarManager.php");
+require_once("Model/Car.php");
+require_once("Manager/CarManager.php");
 
 // Vérifier que l'utilisateur est connécté avec la présence
 // D'un "username" en SESSION
-verifySession();
+// verifySession();
 
 //Class error ??
 $errors = [];
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $carManager = new CarManager();
         // Un seul connect DB par page
-        //Instancier une objet Car avec le sdonnées du formulaire
+        //Instancier une objet Car avec le données du formulaire
         $car = new Car(null, $_POST["brand"], $_POST["model"], $_POST["horsePower"], $_POST["image"]);
         // Ajouter la voiture en BDD  et rediriger
         $carManager = new CarManager();

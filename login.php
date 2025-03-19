@@ -1,35 +1,32 @@
 <?php
 
-require_once("connectDB.php");
+require_once("Manager/UserManager.php");
 require_once("functions.php");
-
 $errors = [];
 
 //Me permet de créer le MDP HASHÉ et de copié coller en bdd
-$pass = password_hash("admin",PASSWORD_DEFAULT);
+$pass = password_hash("admin", PASSWORD_DEFAULT);
 var_dump($pass);
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     if (empty($_POST['username']) || strlen($_POST['username']) < 4) {
         $errors[] = 'Votre username doit contenir 4 caracteres';
     }
     if (empty($_POST['password']) || strlen($_POST['password']) < 4) {
         $errors[] = 'Votre password doit contenir 4 caracteres';
     }
-    
-    if(count($errors) == 0){
-        $pdo = connectDB();
-        
-        $user = selectUserByUsername($pdo, $_POST["username"]);
 
+    if (count($errors) == 0) {
+        $userManager = new UserManager();
+        $user = $userManager->selectUserByUsername($_POST["username"]);
         //Vérification si User trouvée avec le Username
-        if($user != false){
+        if ($user != false) {
             //Sinon vérificaiton mot de passe Formulaire et Hash BDD
-            if(password_verify($_POST["password"], $user["password"])){ 
+            if (password_verify($_POST["password"], $user->getPassword())) {
                 // Je connecte l'utilisateur
                 session_start();
-                $_SESSION["username"] = $user["username"];
+                $_SESSION["username"] = $user->getUsername();
                 header('Location: admin.php');
                 exit();
             }
